@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { rpc } from "@/lib/rpc";
 import React from "react";
 
