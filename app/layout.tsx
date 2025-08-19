@@ -41,7 +41,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar /> {children}
+            <Navbar /> 
+            <div className="pt-24">{children}</div>
           </ThemeProvider>
         </QueryProvider>
       </body>
