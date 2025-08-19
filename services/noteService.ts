@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { CreateNoteInput, NoteResponse } from "@/types/types";
 import {
   createHash,
   createCipheriv,
@@ -168,14 +169,14 @@ export async function deleteExpiredNotes(): Promise<number> {
         {
           isDestroyed: true,
           createdAt: {
-            lte: new Date(Date.now() - 24 * 60 * 60 * 1000), 
+            lte: new Date(Date.now() - 24 * 60 * 60 * 1000),
           },
         },
       ],
     },
     data: {
       isDestroyed: true,
-      content: "", 
+      content: "",
       iv: null,
       salt: null,
     },
