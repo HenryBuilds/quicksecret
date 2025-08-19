@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔐 QuickSecret
 
-## Getting Started
+> **Secure, self-destructing notes that vanish after reading**
 
-First, run the development server:
+[![Live Demo](https://img.shields.io/badge/🌍_Live_Demo-quicksecret.vercel.app-blue?style=for-the-badge)](https://quicksecret.vercel.app/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+
+**Try it live:** [quicksecret.vercel.app](https://quicksecret.vercel.app/)
+
+---
+
+## ✨ Features
+
+- 🔥 **Self-Destructing Notes** - Notes automatically delete after being read
+- 🔒 **Password Protection** - Optional AES-256 encryption for sensitive content
+- ⏰ **Auto-Expiration** - Set custom expiration times (minutes, hours, days)
+- 👀 **View Limits** - Control how many times a note can be viewed (1-10)
+- 🌙 **Dark Mode** - Beautiful light and dark themes
+- 📱 **Mobile Responsive** - Works perfectly on all devices
+
+---
+
+## 🛠️ Tech Stack
+
+- **Next.js 14** with TypeScript
+- **Tailwind CSS** + shadcn/ui components
+- **Elysia** backend with Bun
+- **Prisma** + PostgreSQL
+- **AES-256 encryption**
+- **Deployed on Vercel**
+
+---
+
+## 🚀 Quick Start
 
 ```bash
+# Clone and install
+git clone https://github.com/yourusername/quicksecret.git
+cd quicksecret
+npm install
+
+# Setup environment
+cp .env.example .env.local
+# Add your DATABASE_URL
+
+# Setup database
+npx prisma generate
+npx prisma migrate dev
+
+# Start development
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔒 Security
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **AES-256-CBC encryption** with PBKDF2 key derivation
+- **No password storage** - passwords never saved
+- **Auto-cleanup** - expired notes automatically deleted
+- **Rate limiting** and input validation
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📋 API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Create Note
+```http
+POST /api/notes
+{
+  "content": "Your secret message",
+  "password": "optional-password",
+  "expiresIn": 3600000,
+  "maxViews": 1
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Read Note
+```http
+GET /api/notes/{id}?password=optional-password
+```
 
-## Deploy on Vercel
+### Note Status
+```http
+GET /api/notes/{id}/status
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License & Usage
+
+This project is **free to use** for everyone! Feel free to:
+- ✅ Use it for personal or commercial projects
+- ✅ Modify and customize it
+- ✅ Host your own instance
+- ✅ Contribute improvements
+
+Licensed under MIT - do whatever you want with it! 🎉
+
+---
