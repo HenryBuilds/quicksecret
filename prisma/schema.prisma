@@ -15,30 +15,16 @@ datasource db {
 }
 
 model Note {
-  id               String      @id @default(uuid())
-  slug             String      @unique
-  content          String
-  encryptionMethod String      //  "aes-256-gcm", "rsa", "none"
-  encryptionMeta   Json?       //  { iv: "...", salt: "..." }
-  createdAt        DateTime    @default(now())
-  expiresAt        DateTime?
-  viewedAt         DateTime?
-  destroyed        Boolean     @default(false)
-  viewLimit        Int?        
-  viewCount        Int         @default(0)
-  passphrase       String?     
-  ipCreated        String?     
-  userAgent        String?     
-  deletedAt        DateTime?
-  auditLogs        AuditLog[]  
-}
-
-model AuditLog {
-  id        String   @id @default(uuid())
-  noteId    String
-  note      Note     @relation(fields: [noteId], references: [id])
-  event     String   
-  ip        String?
-  userAgent String?
-  createdAt DateTime @default(now())
+  id          String   @id @default(cuid())
+  content     String   
+  iv          String?  
+  salt        String?  
+  isEncrypted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime?
+  maxViews    Int      @default(1)
+  viewCount   Int      @default(0)
+  isDestroyed Boolean  @default(false)
+  
+  @@map("notes")
 }
